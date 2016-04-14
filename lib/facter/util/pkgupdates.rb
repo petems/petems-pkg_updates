@@ -36,13 +36,15 @@ module Facter::Util::Pkgupdates
 
         if obsolete_packages
           obsolete_packages.each do | obs_pkg |
-            obs_list = obs_pkg[0].split(/ +/)
-            replacement_list = obs_pkg[1].split(/ +/)
-            updates[obs_list[0]] = {}
-            updates[obs_list[0]]['current'] = Facter::Util::Resolution.exec("rpm --query --qf '%{VERSION}-%{RELEASE}' #{obs_list[0]}")
-            updates[obs_list[0]]['replaced_by'] = {}
-            updates[obs_list[0]]['replaced_by']['name'] = replacement_list[1]
-            updates[obs_list[0]]['replaced_by']['version'] = replacement_list[2]
+            unless obs_pkg[1].nil?
+              obs_list = obs_pkg[0].split(/ +/)
+              replacement_list = obs_pkg[1].split(/ +/)
+              updates[obs_list[0]] = {}
+              updates[obs_list[0]]['current'] = Facter::Util::Resolution.exec("rpm --query --qf '%{VERSION}-%{RELEASE}' #{obs_list[0]}")
+              updates[obs_list[0]]['replaced_by'] = {}
+              updates[obs_list[0]]['replaced_by']['name'] = replacement_list[1]
+              updates[obs_list[0]]['replaced_by']['version'] = replacement_list[2]
+            end
           end
         end
       end
