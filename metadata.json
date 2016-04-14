@@ -1,6 +1,6 @@
 {
   "name": "petems-pkg_updates",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "petems",
   "summary": "A collection of facts for reporting packages to be updated.",
   "license": "Apache 2.0",
